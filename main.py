@@ -2,6 +2,7 @@ import discord
 import os
 import random
 import fortune
+from deep_translator import GoogleTranslator
 
 print(os.getenv('TOKEN'))
 intents = discord.Intents.default()
@@ -29,5 +30,11 @@ async def on_message(message):
     if message.content.startswith('$fortune'):
         fort = fortune.get_random_fortune('/usr/share/games/fortunes/fortunes')
         await message.channel.send(fort)
+    
+    if message.content.startswith('$tr '):
+        content = message.content[4:]
+        translation = GoogleTranslator(source='auto', target='en').translate(content)
+        await message.channel.send(translation)
+        
 
 client.run(os.getenv('TOKEN'))
