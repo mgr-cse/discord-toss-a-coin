@@ -35,6 +35,12 @@ async def on_message(message):
         content = message.content[4:]
         translation = GoogleTranslator(source='auto', target='en').translate(content)
         await message.channel.send(translation)
+
+    if message.content.startswith('$fr '):
+        content = message.content[4:]
+        translation = GoogleTranslator(source='auto', target='fr').translate(content)
+        await message.channel.send(translation)
+        
         
 
 client.run(os.getenv('TOKEN'))
